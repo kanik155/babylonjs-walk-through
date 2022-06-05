@@ -1,4 +1,4 @@
-import { Engine, Scene } from "babylonjs";
+import { Engine, WebGPUEngine, Scene } from "babylonjs";
 import React, { useEffect, useRef, useState } from "react";
 
 const BabylonScene = (props) => {
@@ -34,26 +34,39 @@ const BabylonScene = (props) => {
   useEffect(() => {
     if (!loaded) {
       setLoaded(true);
-      const engine = new Engine(
-        reactCanvas.current,
-        antialias,
-        engineOptions,
-        adaptToDeviceRatio
-      );
-      const scene = new Scene(engine, sceneOptions);
-      setScene(scene);
-      if (scene.isReady()) {
-        props.onSceneReady(scene);
-      } else {
-        scene.onReadyObservable.addOnce((scene) => props.onSceneReady(scene));
+
+      const fetchData = async () => {
+        const webGPUSupported = await WebGPUEngine.IsSupportedAsync;
+        let engine;
+        if(webGPUSupported) {
+          engine = new WebGPUEngine(reactCanvas.current, { doNotHandleContextLost : true } );
+          await engine.initAsync();
+        } else {
+          engine = new Engine(
+            reactCanvas.current,
+            antialias,
+            engineOptions,
+            adaptToDeviceRatio
+          );
+        }
+
+        const scene = new Scene(engine, sceneOptions);
+        setScene(scene);
+        if (scene.isReady()) {
+          props.onSceneReady(scene);
+        } else {
+          scene.onReadyObservable.addOnce((scene) => props.onSceneReady(scene));
+        }
+  
+        engine.runRenderLoop(() => {
+          if (typeof onRender === "function") {
+            onRender(scene);
+          }
+          scene.render();
+        });
       }
 
-      engine.runRenderLoop(() => {
-        if (typeof onRender === "function") {
-          onRender(scene);
-        }
-        scene.render();
-      });
+      fetchData().catch(console.error);
     }
 
     return () => {

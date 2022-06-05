@@ -32,7 +32,7 @@ const ModelViewer = () => {
       antialias
       onSceneReady={onSceneReady}
       onRender={onRender}
-      id="my-canvas"
+      id="model-viewer"
     />
   );
 };
