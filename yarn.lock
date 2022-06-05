@@ -289,6 +289,24 @@ axobject-query@^2.2.0:
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
   integrity sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==
 
+babylonjs-gltf2interface@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/babylonjs-gltf2interface/-/babylonjs-gltf2interface-5.9.0.tgz#0c9fd2a408a5ae3aad34ddf607652c031ae9b58f"
+  integrity sha512-cyHOWEXYEqc9oGbHuCEMhVj4GTF8UEb0SmxnwSdfw7omwN6lTqv6VyIjHBrKFa1FFf4moo5a4KAHpW/Q3KsUrg==
+
+babylonjs-loaders@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/babylonjs-loaders/-/babylonjs-loaders-5.9.0.tgz#e4376ef7ba998325d9a2c1d300cfcd56212e63d1"
+  integrity sha512-oN35MjlkWCCCxY4xvs8kEkHuGJ0asGFplkIvsy7yobX2e60UMxWFBXua0hrZ8ZQJnp3klmVmfoPg+rSOvoFF1w==
+  dependencies:
+    babylonjs "^5.9.0"
+    babylonjs-gltf2interface "^5.9.0"
+
+babylonjs@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/babylonjs/-/babylonjs-5.9.0.tgz#4502589228ba67755ec8b800a95e236df151f5e4"
+  integrity sha512-RbbigQ7lWG4ni03oTqy9DNXbfyznUnoWQwVi/Min7eTHgsHV5aqOJ74XgGl8kznC0m/B40YioJDpVO/jD1ly/Q==
+
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
