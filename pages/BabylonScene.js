@@ -1,4 +1,4 @@
-import { Engine, WebGPUEngine, Scene } from "babylonjs";
+import { Engine, WebGPUEngine, Scene, SceneInstrumentation } from "babylonjs";
 import React, { useEffect, useRef, useState } from "react";
 
 const BabylonScene = (props) => {
@@ -57,6 +57,11 @@ const BabylonScene = (props) => {
         } else {
           scene.onReadyObservable.addOnce((scene) => props.onSceneReady(scene));
         }
+        const sceneInstrumentation = new SceneInstrumentation(scene);
+        sceneInstrumentation.captureFrameTime = true;
+        scene.onAfterRenderObservable.add(() => {
+          console.log((1000 / sceneInstrumentation.frameTimeCounter.lastSecAverage).toFixed(0) + " fps");
+        });
   
         engine.runRenderLoop(() => {
           if (typeof onRender === "function") {
