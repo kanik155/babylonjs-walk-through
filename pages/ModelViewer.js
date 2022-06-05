@@ -5,16 +5,20 @@ import BabylonScene from "./BabylonScene";
 
 const onSceneReady = (scene) => {
   console.log("running");
-  scene.createDefaultCameraOrLight(true, true, true);
-  var helper = scene.createDefaultEnvironment();
-  helper.ground.dispose();
+  var helperCamera = scene.createDefaultCamera(true, true, true);
+  var helperCamera = scene.cameras.pop();
+  scene.cameras.push(helperCamera);
+  helperCamera.radius = 4;
+  helperCamera.alpha = Math.PI / 2;
+
+  var helperEnvironment = scene.createDefaultEnvironment();
+  helperEnvironment.ground.dispose();
+
   SceneLoader.Append(
     "/",
     "DamagedHelmet.glb",
     scene,
-    (meshes) => {
-      // scene.activeCamera = meshes.cameras[1];
-    }
+    (meshes) => {}
   );
 
   return scene;
@@ -22,7 +26,7 @@ const onSceneReady = (scene) => {
 
 const onRender = (scene) => {};
 
-const CafeBanner = () => {
+const ModelViewer = () => {
   return (
     <BabylonScene
       antialias
@@ -33,4 +37,4 @@ const CafeBanner = () => {
   );
 };
 
-export default CafeBanner;
+export default ModelViewer;
